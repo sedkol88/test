@@ -7,18 +7,24 @@ const classes = {
   loadMoreHidden: 'load-more-hidden',
 }
 
-let page = 1;
+let page = 499;
 
 serviceMovies()
   .then((data) => {
     console.log(data);
     refs.movieList.innerHTML = createMarkup(data.results);
-    refs.loadMoreBtn.classList.remove(classes.loadMoreHidden);
-    refs.loadMoreBtn.addEventListener('click', handleloadMore)
+
+    if (data.page < data.total_pages && data.page < 500) {
+      refs.loadMoreBtn.classList.remove(classes.loadMoreHidden);
+      refs.loadMoreBtn.addEventListener('click', handleLoadMore)
+    }
+
   })
   .catch((err) => {
     console.log(err);
   });
+
+
 
 function serviceMovies (page = 1) {
   const BASE_URL = 'https://api.themoviedb.org/3';
@@ -52,7 +58,7 @@ function createMarkup(arr) {
   ).join('')
 }
 
-function handleloadMore(event) {
+function handleLoadMore(event) {
   page += 1;
   refs.loadMoreBtn.disabled = true;
 
@@ -60,6 +66,13 @@ function handleloadMore(event) {
   .then((data) => {
     console.log(data);
     refs.movieList.insertAdjacentHTML('beforeend', createMarkup(data.results));
+
+    if (data.page >= 500) {
+      refs.loadMoreBtn.classList.add(classes.loadMoreHidden);
+      refs.loadMoreBtn.removeEventListener('click', handleLoadMore)
+      return
+    }
+
     refs.loadMoreBtn.disabled = false;
   })
   .catch((err) => {
