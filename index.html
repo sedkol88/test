@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>test</title>
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/styles.css" />
   </head>
 
   <body>
-    <ul class="js-movie-list movie-list"></ul>
-    <div class="button-container">
-      <button class="js-load-more load-more-hidden">LOAD MORE</button>
-    </div>
+    <form action="submit" class="js-search">
+      <div class="js-form-container">
+        <input type="text" name="country" />
+      </div>
 
-    <!-- Lodash library script file -->
-    <!-- <script async src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
-      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+      <button>Пошук</button>
+    </form>
+    <button class="js-add">Додати краину</button>
+    <ul class="js-list"></ul>
 
-    <script src="js/test.js" type="module"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/test.js"></script>
   </body>
 </html>
